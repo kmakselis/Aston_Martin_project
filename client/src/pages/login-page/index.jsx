@@ -23,10 +23,10 @@ const validationSchema = yup.object({
 });
 
 const LoginPage = () => {
-  const onSubmit = async (values) => {
-    console.log('Forma patvirtinta, atliekami veiksmai...');
-    console.log(values);
-  };
+  // const onSubmit = async (values) => {
+  //   console.log('Forma patvirtinta, atliekami veiksmai...');
+  //   console.log(values);
+  // };
 
   const {
     dirty, values, errors, touched, isValid,
@@ -34,7 +34,7 @@ const LoginPage = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    // onSubmit,
   });
 
   return (

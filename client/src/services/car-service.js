@@ -1,5 +1,5 @@
 const domain = process.env.REACT_APP_SERVER_ADDRESS;
-const collectionName = 'cars';
+const collectionName = 'api/cars';
 const relationsParams = 'joinBy=categoryId';
 
 const fetchAll = async (paramsString = null) => {

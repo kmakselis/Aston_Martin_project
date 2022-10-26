@@ -44,10 +44,10 @@ const validationSchema = yup.object({
 });
 
 const RegisterPage = () => {
-  const onSubmit = (values) => {
-    console.log('įvestos reikšmės');
-    console.table(values);
-  };
+  // const onSubmit = (values) => {
+  //   console.log('įvestos reikšmės');
+  //   console.table(values);
+  // };
 
   const {
     values, errors, touched, dirty, isValid,
@@ -55,7 +55,7 @@ const RegisterPage = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    // onSubmit,
   });
 
   return (

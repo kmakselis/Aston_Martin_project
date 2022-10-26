@@ -6,13 +6,29 @@ const createCarViewModel = require('../view-models/create-car-view-model');
 const createCarNotFoundError = (carId) => createNotFoundError(`Car with id '${carId}' was not found`);
 
 const fetchAll = async (req, res) => {
-  const { joinBy } = req.query;
+  const {
+    joinBy, id, price_lte, price_gte, categoryId,
+  } = req.query;
   const joinedDocuments = joinBy === 'categoryId';
+  const filter = {};
+
+  if (id) filter._id = id instanceof Array ? { $in: id } : id;
+  if (categoryId) {
+    filter.categoryId = categoryId instanceof Array
+      ? { $in: categoryId }
+      : categoryId;
+  }
+
+  if (price_lte || price_gte) {
+    filter.price = {};
+    if (price_lte) filter.price.$lte = price_lte;
+    if (price_gte) filter.price.$gte = price_gte;
+  }
 
   try {
     const carDocs = joinedDocuments
-      ? await CarModel.find().populate('categoryId')
-      : await CarModel.find();
+      ? await CarModel.find(filter).populate('categoryId')
+      : await CarModel.find(filter);
 
     res.status(200).json(joinedDocuments
       ? carDocs.map(createCarPopulatedViewModel)
