@@ -5,6 +5,7 @@ const AutoSelectField = ({
   options,
   value,
   onChange,
+  ...props
 }) => (
   <Autocomplete
     disablePortal
@@ -12,6 +13,7 @@ const AutoSelectField = ({
     sx={{ width: '100%' }}
     value={value}
     onChange={onChange}
+    {...props}
     renderInput={({
       InputLabelProps,
       InputProps,
@@ -20,7 +22,7 @@ const AutoSelectField = ({
       id,
     }) => (
       <TextField
-        label="Spalvos"
+        label="Kategorija"
         InputLabelProps={InputLabelProps}
         InputProps={InputProps}
         fullWidth={fullWidth}

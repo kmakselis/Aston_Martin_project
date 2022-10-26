@@ -95,7 +95,7 @@ const CarCard = ({
             <Typography variant="subtitle" component="div">{zeroToHundred}</Typography>
           </Box>
           <Box sx={{ fontWeight: 'bold', height: '50px' }}>
-            <Typography variant="subtitle" component="div">{price}</Typography>
+            <Typography variant="subtitle" component="div">{`${price} €`}</Typography>
           </Box>
         </Box>
       </CardContent>

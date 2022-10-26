@@ -1,4 +1,3 @@
-const { removeEmptyProps } = require('../helpers');
 const { createNotFoundError, sendErrorResponse } = require('../helpers/errors');
 const CarModel = require('../models/car-model');
 const createCarPopulatedViewModel = require('../view-models/create-car-populated-view-model');
@@ -7,10 +6,17 @@ const createCarViewModel = require('../view-models/create-car-view-model');
 const createCarNotFoundError = (carId) => createNotFoundError(`Car with id '${carId}' was not found`);
 
 const fetchAll = async (req, res) => {
-  try {
-    const carPopulatedDocs = await CarModel.find().populate('categoryId');
+  const { joinBy } = req.query;
+  const joinedDocuments = joinBy === 'categoryId';
 
-    res.status(200).json(carPopulatedDocs.map(createCarPopulatedViewModel));
+  try {
+    const carDocs = joinedDocuments
+      ? await CarModel.find().populate('categoryId')
+      : await CarModel.find();
+
+    res.status(200).json(joinedDocuments
+      ? carDocs.map(createCarPopulatedViewModel)
+      : carDocs.map(createCarViewModel));
   } catch (err) { sendErrorResponse(err, res); }
 };
 
@@ -28,7 +34,7 @@ const fetch = async (req, res) => {
     res.status(200).json(joinedDocuments
       ? foundCar.map(createCarPopulatedViewModel)
       : foundCar.map(createCarViewModel)
-      );
+    );
   } catch (err) { sendErrorResponse(err, res); }
 };
 
@@ -45,44 +51,69 @@ const create = async (req, res) => {
   } catch (err) { sendErrorResponse(err, res); }
 };
 
-const update = async (req, res) => {
+const replace = async (req, res) => {
   const carId = req.params.id;
   const {
-    model,
-    engine,
-    categoryId,
-    color,
-    gearbox,
-    maxSpeed,
-    power,
-    zeroToHundred,
-    price,
-    img
+    title, description, categoryId, images, price,
   } = req.body;
-  const newCarData = removeEmptyProps({
-    model,
-    engine,
-    categoryId,
-    color,
-    gearbox,
-    maxSpeed,
-    power,
-    zeroToHundred,
-    price,
-    img
-  });
+  const newCarData = {
+    title, description, categoryId, images, price,
+  };
 
   try {
-    await CarModel.validateUpdateData(newCarData);
+    await CarModel.validateData(newCarData);
+
     const updatedCarDoc = await CarModel.findByIdAndUpdate(
       carId,
       newCarData,
-      { new: true }
+      { new: true, runValidators: true },
     );
 
     if (updatedCarDoc === null) throw createCarNotFoundError(carId);
 
-    res.status(200).json(updatedCarDoc);
+    res.status(200).json(createCarViewModel(updatedCarDoc));
+  } catch (err) { sendErrorResponse(err, res); }
+};
+
+const update = async (req, res) => {
+  const carId = req.params.id;
+  const requestData = req.body;
+
+  try {
+    await CarModel.validateUpdateData(requestData);
+    const {
+      model,
+      engine,
+      categoryId,
+      color,
+      gearbox,
+      maxSpeed,
+      power,
+      zeroToHundred,
+      price,
+      img
+    } = requestData;
+
+    const updatedCarDoc = await CarModel.findByIdAndUpdate(
+      carId,
+      {
+        model,
+        engine,
+        categoryId,
+        color,
+        gearbox,
+        maxSpeed,
+        power,
+        zeroToHundred,
+        price,
+        img,
+      },
+      { new: true },
+    );
+
+    if (updatedCarDoc === null) throw createCarNotFoundError(carId);
+
+    res.status(200).json(createCarViewModel(updatedCarDoc));
 
   } catch (err) { sendErrorResponse(err, res); }
 };
@@ -92,7 +123,6 @@ const remove = async (req, res) => {
 
   try {
     const deletedCarDoc = await CarModel.findByIdAndDelete(carId);
-
     if (deletedCarDoc === null) throw createCarNotFoundError(carId);
 
     res.status(200).json(createCarViewModel(deletedCarDoc));
@@ -104,6 +134,7 @@ module.exports = {
   fetchAll,
   fetch,
   create,
+  replace,
   update,
   remove,
 };

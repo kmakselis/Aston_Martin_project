@@ -1,6 +1,9 @@
+const createCategoryViewModel = require('./create-category-view-model');
+
 const createCarPopulatedViewModel = (carPopulatedDoc) => ({
   id: carPopulatedDoc._id.toString(),
   model: carPopulatedDoc.model,
+  category: createCategoryViewModel(carPopulatedDoc.categoryId),
   engine: carPopulatedDoc.engine,
   color: carPopulatedDoc.color,
   gearbox: carPopulatedDoc.gearbox,
@@ -9,8 +12,6 @@ const createCarPopulatedViewModel = (carPopulatedDoc) => ({
   zeroToHundred: carPopulatedDoc.zeroToHundred,
   price: carPopulatedDoc.price,
   img: carPopulatedDoc.img,
-  category: carPopulatedDoc.categoryId.title,
-  categoryId: carPopulatedDoc.categoryId.id,
 });
 
 module.exports = createCarPopulatedViewModel;
