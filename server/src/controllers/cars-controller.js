@@ -48,9 +48,8 @@ const fetch = async (req, res) => {
     if (foundCar === null) throw createCarNotFoundError(carId);
 
     res.status(200).json(joinedDocuments
-      ? foundCar.map(createCarPopulatedViewModel)
-      : foundCar.map(createCarViewModel)
-    );
+      ? createCarPopulatedViewModel(foundCar)
+      : createCarViewModel(foundCar));
   } catch (err) { sendErrorResponse(err, res); }
 };
 
