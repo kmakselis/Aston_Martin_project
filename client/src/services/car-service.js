@@ -28,19 +28,40 @@ const fetchByIdArr = async (idArr) => {
   return items;
 };
 
-const update = async ({ id, ...updateProps }) => {
+const create = async (carProps) => {
+  const response = await fetch(`${domain}/${collectionName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(carProps),
+  });
+
+  const car = await response.json();
+
+  return car;
+};
+
+const update = async (id, cupProps) => {
   const response = await fetch(`${domain}/${collectionName}/${id}`, {
     method: 'PATCH',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updateProps),
+    body: JSON.stringify(cupProps),
   });
 
-  const responseData = await response.json();
+  const cup = await response.json();
 
-  return responseData;
+  return cup;
+};
+
+const remove = async (id) => {
+  await fetch(`${domain}/${collectionName}/${id}`, {
+    method: 'DELETE',
+  });
+
+  return true;
 };
 
 const getPriceRange = async () => {
@@ -54,7 +75,9 @@ const CarService = {
   fetchAll,
   fetchById,
   fetchByIdArr,
+  create,
   update,
+  remove,
   getPriceRange,
 };
 

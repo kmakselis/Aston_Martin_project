@@ -18,7 +18,7 @@ const CarForm = ({
   const [categories, setCategories] = React.useState([]);
   const [model, setModel] = React.useState(initValues?.model ?? '');
   const [engine, setEngine] = React.useState(initValues?.engine ?? '');
-  const [category, setCategory] = React.useState(initValues?.categoryId ?? '');
+  const [categoryId, setCategoryId] = React.useState(initValues?.categoryId ?? '');
   const [color, setColor] = React.useState(initValues?.color ?? '');
   const [gearbox, setGearbox] = React.useState(initValues?.gearbox ?? '');
   const [maxSpeed, setMaxSpeed] = React.useState(initValues?.maxSpeed ?? '');
@@ -33,7 +33,7 @@ const CarForm = ({
     onSubmit({
       model,
       engine,
-      categoryId: category,
+      categoryId,
       color,
       gearbox,
       maxSpeed,
@@ -74,8 +74,8 @@ const CarForm = ({
           fullWidth
           select
           variant="filled"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
+          value={categoryId}
+          onChange={(event) => setCategoryId(event.target.value)}
         >
           {categories.map(({ id, title }) => (
             <MenuItem key={id} value={id}>{title}</MenuItem>

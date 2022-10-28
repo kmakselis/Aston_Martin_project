@@ -90,6 +90,7 @@ const AdminPage = () => {
         }) => (
           <Grid key={id} item xs={12} sm={12} md={6} lg={4} xl={3}>
             <CarCard
+              id={id}
               model={model}
               engine={engine}
               color={color}
