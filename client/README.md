@@ -67,6 +67,10 @@ npm install morgan
 npm install cors
 npm install jsonwebtoken
 ```
+#### Used Server
+```
+MongoDB
+```
 
 ## Launch server
 ```
