@@ -77,7 +77,7 @@ const Navbar = () => {
 
         <Box sx={{ display: { xs: 'none', [expandBr]: 'flex' }, alignSelf: 'stretch' }}>
           <Nav.Link to="/auth/login" onClick={() => setOpen(false)}>Prisijungimas</Nav.Link>
-          <Divider orientation="vertical" flexItem sx={{ my: 2 }} />
+          <Divider orientation="vertical" flexItem sx={{ my: 2, bgcolor: 'white' }} />
           <Nav.Link to="/auth/register" onClick={() => setOpen(false)}>Registracija</Nav.Link>
         </Box>
       </Box>

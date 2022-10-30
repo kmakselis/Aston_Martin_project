@@ -75,7 +75,6 @@ const HomePage = () => {
     <Box>
       <Home.Background component="img" src={bgImage} />
       <Home.ContentContainer>
-
         <Home.ModelNames component="main">
 
           {myObjects.map((el, index) => (

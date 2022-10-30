@@ -16,23 +16,11 @@ export const ContentContainer = styled(Box)({
   top: 180,
   left: '5%',
   height: '500px',
-  width: '80%',
-  order: 2,
+  width: '95%',
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'start',
-});
-
-export const ParamsContainer = styled(Box)({
-  position: 'absolute',
-  left: '66%',
-  height: '300px',
-  width: '300px',
-  order: 3,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start',
-  alignItems: 'start',
+  flexWrap: 'wrap',
 });
 
 export const ModelNames = styled(Box)(({ theme }) => ({
@@ -44,3 +32,10 @@ export const ModelNames = styled(Box)(({ theme }) => ({
   alignItems: 'flex-start',
   gap: theme.spacing(6),
 }));
+
+export const ParamsContainer = styled(Box)({
+  height: '300px',
+  width: '300px',
+  display: 'flex',
+  flexDirection: 'column',
+});
