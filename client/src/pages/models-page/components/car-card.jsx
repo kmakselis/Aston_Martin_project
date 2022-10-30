@@ -24,26 +24,32 @@ const CarCard = ({
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Card sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      width: '100%',
+      boxShadow: 5,
+    }}
+    >
       <Box sx={{ position: 'relative', width: '100%', pt: '65%' }}>
         <Image src={img} sx={{ position: 'absolute', top: 0, left: 0 }} />
       </Box>
-      <Box sx={{ m: 2, display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h5" component="div">{model}</Typography>
-      </Box>
-      <CardContent sx={{
-        display: 'flex', justifyContent: 'center', height: '100%', flexGrow: 1,
+      <Box sx={{
+        m: 2,
+        display: 'flex',
+        justifyContent: 'center',
       }}
       >
+        <Typography variant="h5" component="div">{model}</Typography>
+      </Box>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'left',
-          width: '50%',
-        }}
-        >
+      <CardContent sx={{
+        display: 'flex',
+        flexGrow: 1,
+      }}
+      >
+        <Box sx={{ width: '50%' }}>
           <Box sx={{ height: '50px' }}>
             <Typography variant="subtitle" component="div">Variklis:</Typography>
           </Box>
@@ -68,14 +74,7 @@ const CarCard = ({
 
         </Box>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'right',
-          alignItems: 'left',
-          width: '50%',
-        }}
-        >
+        <Box sx={{ width: '50%' }}>
           <Box sx={{ fontWeight: 'bold', height: '50px' }}>
             <Typography variant="subtitle" component="div">{engine}</Typography>
           </Box>

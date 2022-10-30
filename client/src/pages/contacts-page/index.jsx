@@ -1,49 +1,16 @@
 import * as React from 'react';
 import {
-  Box,
-  styled,
   TextField,
   Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import * as yup from 'yup';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import InquiryForm from './inquiry-form';
-// import { className } from '@emotion/react';
-// import CartContext from '../contexts/cart-context';
+import * as ContactsComponents from './styled-components';
+import validationSchema from './form-validation-schema';
 
-const Background = styled(Box)({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  height: '100%',
-  width: '100%',
-  order: 1,
-  objectFit: 'cover',
-});
-
-const ContentContainer = styled(Box)({
-  height: '600px',
-  width: '700px',
-  order: 2,
-  display: 'flex',
-  flexDirection: 'column',
-  alignContent: 'center',
-  justifyContent: 'center',
-});
-
-const ParamsContainer = styled(Box)({
-  position: 'absolute',
-  top: 50,
-  height: '100%',
-  width: '700px',
-  display: 'flex',
-  flexDirection: 'column',
-  textAlign: 'center',
-});
-
-const dateNow = moment(new Date());
+const dateNow = moment().toDate();
 
 const ContactsPage = () => {
   const currentCar = localStorage.getItem('modelName');
@@ -56,21 +23,6 @@ const ContactsPage = () => {
     testdate: dateNow,
   };
 
-  const validationSchema = yup.object({
-    email: yup.string()
-      .required('Privaloma')
-      .email('Neteisingas pašto formatas'),
-    emailConfirmation: yup.string()
-      .required('Privaloma')
-      .oneOf([yup.ref('email')], 'El. paštas nesutampa'),
-    fullname: yup.string()
-      .required('Privaloma')
-      .min(6, 'Mažiausiai 6 simboliai')
-      .matches(/^[a-ząčęėįšųūž ]+$/i, 'Gali būti tik raidės ir tarpai'),
-    birthdate: yup.date('Neteisingas datos formatas, pateikite formatu: YYYY-MM-DD')
-      .max(dateNow, 'Negalite pasirinkti ateities laiko'),
-  });
-
   const {
     values, errors, touched, dirty, isValid,
     handleChange, handleBlur, handleSubmit, setFieldValue, setFieldTouched,
@@ -80,10 +32,10 @@ const ContactsPage = () => {
   });
 
   return (
-    <ContentContainer sx={{ border: 1, borderColor: 'error.main' }}>
-      <Background component="img" src="/contacts-background.jpg" />
+    <ContactsComponents.ContentContainer sx={{ border: 1, borderColor: 'error.main' }}>
+      <ContactsComponents.Background component="img" src="/contacts-background.jpg" />
 
-      <ParamsContainer>
+      <ContactsComponents.ParamsContainer>
         <Typography
           variant="h1"
           component="h1"
@@ -162,7 +114,7 @@ const ContactsPage = () => {
             inputFormat="yyyy-MM-DD"
             disableMaskedInput
             value={values.testdate}
-            disableFuture
+            disablePast
             onChange={(momentInstance) => {
               // eslint-disable-next-line no-underscore-dangle
               if (momentInstance._isValid) {
@@ -186,8 +138,8 @@ const ContactsPage = () => {
             )}
           />
         </InquiryForm>
-      </ParamsContainer>
-    </ContentContainer>
+      </ContactsComponents.ParamsContainer>
+    </ContactsComponents.ContentContainer>
   );
 };
 

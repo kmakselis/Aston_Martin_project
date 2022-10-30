@@ -3,55 +3,10 @@ import {
   Box,
   Button,
   LinearProgress,
-  styled,
   Typography,
 } from '@mui/material';
 import Countup from 'react-countup';
-// import CartContext from '../contexts/cart-context';
-
-const Background = styled(Box)({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  height: '100%',
-  width: '100%',
-  order: 1,
-  objectFit: 'cover',
-});
-
-const ContentContainer = styled(Box)({
-  position: 'absolute',
-  top: 180,
-  left: '5%',
-  height: '500px',
-  width: '80%',
-  order: 2,
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'start',
-});
-
-const ParamsContainer = styled(Box)({
-  position: 'absolute',
-  left: '66%',
-  height: '300px',
-  width: '300px',
-  order: 3,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start',
-  alignItems: 'start',
-});
-
-const ModelNames = styled(Box)(({ theme }) => ({
-  height: '80%',
-  width: 650,
-  color: theme.palette.common.white,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: theme.spacing(6),
-}));
+import * as Home from './components/styled-components';
 
 const MAX_SPEED = 400;
 const speedRatio = 100 / MAX_SPEED;
@@ -118,10 +73,10 @@ const HomePage = () => {
 
   return (
     <Box>
-      <Background component="img" src={bgImage} />
-      <ContentContainer>
+      <Home.Background component="img" src={bgImage} />
+      <Home.ContentContainer>
 
-        <ModelNames component="main">
+        <Home.ModelNames component="main">
 
           {myObjects.map((el, index) => (
             <Button
@@ -138,9 +93,9 @@ const HomePage = () => {
               {el.name}
             </Button>
           ))}
-        </ModelNames>
+        </Home.ModelNames>
 
-        <ParamsContainer>
+        <Home.ParamsContainer>
           <Typography
             variant="h6"
             component="h1"
@@ -193,8 +148,8 @@ const HomePage = () => {
               color="secondary"
             />
           </Box>
-        </ParamsContainer>
-      </ContentContainer>
+        </Home.ParamsContainer>
+      </Home.ContentContainer>
     </Box>
   );
 };

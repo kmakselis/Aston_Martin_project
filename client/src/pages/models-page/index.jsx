@@ -39,7 +39,12 @@ const ModelsPage = () => {
       >
         <Typography
           variant="h3"
-          sx={{ lineHeight: '2em' }}
+          sx={{
+            lineHeight: '2em',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
         >
           Specialūs pasiūlymai
         </Typography>
