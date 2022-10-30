@@ -11,20 +11,9 @@ export const Background = styled(Box)({
   objectFit: 'cover',
 });
 
-export const ContentContainer = styled(Box)({
-  height: '600px',
-  width: '700px',
-  order: 2,
-  display: 'flex',
-  flexDirection: 'column',
-  alignContent: 'center',
-  justifyContent: 'center',
-});
-
 export const ParamsContainer = styled(Box)({
-  position: 'absolute',
-  top: 50,
-  height: '100%',
+  marginTop: '-150px',
+  height: '80%',
   width: '700px',
   display: 'flex',
   flexDirection: 'column',

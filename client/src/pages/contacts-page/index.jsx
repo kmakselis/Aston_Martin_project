@@ -32,13 +32,14 @@ const ContactsPage = () => {
   });
 
   return (
-    <ContactsComponents.ContentContainer sx={{ border: 1, borderColor: 'error.main' }}>
+    <>
       <ContactsComponents.Background component="img" src="/contacts-background.jpg" />
 
       <ContactsComponents.ParamsContainer>
         <Typography
-          variant="h1"
+          variant="h2"
           component="h1"
+          zIndex={5}
           sx={{ color: '#fff', lineHeight: '3em' }}
         >
           Gauti pasiūlymą
@@ -47,6 +48,7 @@ const ContactsPage = () => {
         <Typography
           variant="h4"
           component="h1"
+          zIndex={5}
           sx={{
             color: '#fff', lineHeight: '1.5em', align: 'center',
           }}
@@ -63,7 +65,6 @@ const ContactsPage = () => {
             sx={{ backgroundColor: 'white' }}
             name="modelName"
             type="text"
-            fullWidth
             value={values.modelName}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -76,7 +77,6 @@ const ContactsPage = () => {
             label="Prašome įvesti savo el. paštą"
             type="email"
             variant="filled"
-            fullWidth
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -89,7 +89,6 @@ const ContactsPage = () => {
             label="El. pašto pakartojimas"
             type="email"
             variant="filled"
-            fullWidth
             value={values.emailConfirmation}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -102,7 +101,6 @@ const ContactsPage = () => {
             label="Vardas Pavardė"
             type="text"
             variant="filled"
-            fullWidth
             value={values.fullname}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -125,12 +123,11 @@ const ContactsPage = () => {
             renderInput={(params) => (
               <TextField
                 sx={{ backgroundColor: 'white' }}
-            // eslint-disable-next-line react/jsx-props-no-spreading
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...params}
                 name="testdate"
                 label="Bandomojo važiavimo data"
                 variant="filled"
-                fullWidth
                 onBlur={handleBlur}
                 error={touched.testdate && Boolean(errors.testdate)}
                 helperText={touched.testdate && errors.testdate}
@@ -139,7 +136,7 @@ const ContactsPage = () => {
           />
         </InquiryForm>
       </ContactsComponents.ParamsContainer>
-    </ContactsComponents.ContentContainer>
+    </>
   );
 };
 
